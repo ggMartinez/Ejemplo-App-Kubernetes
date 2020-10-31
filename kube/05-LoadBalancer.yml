@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: lista-http-lb
+  namespace: reportes
+spec:
+  rules:
+  - host: lista.k8s.esi.edu.uy
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          serviceName: lista-http
+          servicePort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: form-http-lb
+  namespace: reportes
+spec:
+  rules:
+  - host: form.k8s.esi.edu.uy
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          serviceName: form-http
+          servicePort: 80

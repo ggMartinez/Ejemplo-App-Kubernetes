@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: db
+  namespace: reportes
+data:
+  HOST: "192.168.5.8"
+  USER: "k8s"
+  NAME: "k8s"
+  PORT: "3306"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: database-config
+  namespace: reportes
+data:
+  content: |
+    <?php
+       define("DB_HOST","192.168.5.8");
+       define("DB_USER","k8s");
+       define("DB_PASS",getenv('PASS'));
+       define("DB_NAME","k8s");
+       define("DB_PORT","3306");
+

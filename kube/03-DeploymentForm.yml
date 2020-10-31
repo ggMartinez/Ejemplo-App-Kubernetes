@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: form
+  namespace: reportes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: form 
+  template:
+    metadata:
+      labels:
+        app: form
+    spec:
+      containers:
+      - name: form 
+        image: ggmartinez/test:form
+        ports:
+        - containerPort: 80
+        envFrom:
+        - secretRef:
+            name: db-password  
+        volumeMounts:
+          - mountPath: /var/www/html/database.php
+            subPath: database.php
+            name: database-mnt
+
+      volumes:
+        - name: database-mnt
+          configMap:
+            name: database-config
+            items:
+              - key: content
+                path: database.php
+

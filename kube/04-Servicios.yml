@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lista-http
+  namespace: reportes
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: lista
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: form-http
+  namespace: reportes
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: form
+  type: NodePort

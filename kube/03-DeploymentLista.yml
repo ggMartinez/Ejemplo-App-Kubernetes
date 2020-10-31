@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lista
+  namespace: reportes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lista
+  template:
+    metadata:
+      labels:
+        app: lista
+    spec:
+      containers:
+      - name: lista
+        image: ggmartinez/test:lista 
+        ports:
+        - containerPort: 80
+        envFrom:
+        - secretRef:
+            name: db-password
+        - configMapRef:
+            name: db
+
+
